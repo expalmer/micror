@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <base href="/adm">
+</head>
+<body>
+  <h1><a href="/">INDEX</a></h1>
+  <h2></h2>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">about</a></li>
+    <li><a href="/post/123">post 123</a></li>
+    <li><a href="/posts/10/asc">posts page order</a></li>
+  </ul>
+  <script src="micror.js"></script>
+  <script>
+    var h2 = document.querySelector('h2');
+    micror('/', function(ctx) {
+      h2.textContent = 'Home';
+    });
+    micror('/about', function(ctx) {
+      h2.textContent = 'About';
+    });
+    micror('/post/:id', function(ctx) {
+      h2.textContent = 'Post ' + ctx.params.id;
+    });
+    micror('/posts/:page/:order', function(ctx) {
+       h2.textContent = 'Posts page' + ctx.params.page + '-' + ctx.params.order;
+    });
+    micror.run({base: '/adm', hash: true});
+  </script>
+</body>
+</html>
